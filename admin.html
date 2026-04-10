@@ -6,7 +6,6 @@
     <title>Admin - Hakim Livs</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="admin.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=keyboard_arrow_left,keyboard_arrow_right" />
   </head>
   <body>
     <header class="site-header">
@@ -14,123 +13,56 @@
         <a href="index.html" class="logo">Hakim Livs</a>
         <ul class="nav-links">
           <li><a href="products.html">Products</a></li>
+          <li><a href="cart.html">Cart (0)</a></li>
           <li><a href="register.html">Register</a></li>
           <li><a href="admin.html">Admin</a></li>
         </ul>
       </nav>
     </header>
-    
-    <h1>Admin</h1>
+
     <main class="admin-main">
+      <h1>Admin – Create Product</h1>
 
-      <div class="admin-left-section">
-
-        <div class="create-event">
-          <p>Create Event</p>
-          <form id="createEventForm" class="admin-form">
-            <div class="admin-form-row">
-              <label for="name">Name</label>
-              <input type="text" id="name" required />
-            </div>
-            <div class="admin-form-row">
-              <label for="price">Price</label>
-              <input type="number" id="price" step="0.01" min="0" required />
-            </div>
-            <div class="admin-form-row">
-              <label for="stock">Stock</label>
-              <input type="number" id="stock" min="0" required />
-            </div>
-            <div class="admin-form-row">
-              <label for="location">Location</label>
-              <input type="text" id="location" required />
-            </div>
-            <div class="admin-form-row">
-              <label for="category">Category</label>
-              <input type="text" id="category" required />
-            </div>
-            <div class="admin-form-row">
-              <label for="image">Image URL</label>
-              <input type="url" id="image" required />
-            </div>
-            <div class="admin-form-row">
-              <label for="slug">Slug</label>
-              <input type="text" id="slug" required placeholder="e.g. organic-tomatoes" />
-            </div>
-            <button type="submit">Create Event</button>
-          </form>
+      <form id="createProductForm" class="admin-form">
+        <div class="admin-form-row">
+          <label for="name">Name</label>
+          <input type="text" id="name" required />
         </div>
-<!-- 
-        <div class="event-list">
-          <p>Events<p>
-          <div class="admin-table-wrap">
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Stock</th>
-                  <th>Slug</th>
-                </tr>
-              </thead>
-              <tbody id="productsTableBody">
-                <tr><td colspan="4">Loading...</td></tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="admin-form-row">
+          <label for="price">Price</label>
+          <input type="number" id="price" step="0.01" min="0" required />
         </div>
-      </div> -->
-
-      
-       <div class="event-list">
-          <p>Events<p>
-          <div id="event-products-body" class="event-cards"></div>
+        <div class="admin-form-row">
+          <label for="stock">Stock</label>
+          <input type="number" id="stock" min="0" required />
         </div>
+        <div class="admin-form-row">
+          <label for="image">Image URL</label>
+          <input type="url" id="image" required />
+        </div>
+        <div class="admin-form-row">
+          <label for="slug">Slug</label>
+          <input type="text" id="slug" required placeholder="e.g. organic-tomatoes" />
+        </div>
+        <button type="submit">Create Product</button>
+      </form>
 
+      <h2>Products</h2>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Slug</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody">
+            <tr><td colspan="4">Loading...</td></tr>
+          </tbody>
+        </table>
       </div>
-
-      <div class="admin-right-section">  
-        
-        <div class="event-calendar-box">
-          <p>Calendar</p>
-          <div class="event-calendar">
-              <div class="calendar-header">
-                <button id="previous-month" class="previous-btn"><span class="material-symbols-outlined">keyboard_arrow_left</span></button>
-                <div id="month-year"></div>
-                <button id="next-month" class="next-btn"><span class="material-symbols-outlined">keyboard_arrow_right</span></button>
-              </div>
-              <div class="weekdays">
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-                <div>Sun</div>
-              </div>
-              <div id="days"></div>
-            </div>
-        </div>
-      
-        <div class="recent-events">
-          <p>Recent Events<p>
-          <div class="admin-table-wrap">
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Stock</th>
-                  <th>Slug</th>
-                </tr>
-                </thead>
-                <tbody id="productsTableBody">
-                  <tr><td colspan="4">Loading...</td></tr>
-                </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
     </main>
 
     <script type="module" src="./src/scripts/admin.js"></script>

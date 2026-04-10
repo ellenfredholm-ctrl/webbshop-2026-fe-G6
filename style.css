@@ -204,7 +204,7 @@ body {
   margin: 0 0 1rem 0;
 }
 
-.see-details-btn {
+.add-to-cart-btn {
   margin-top: auto;
   background: var(--color-primary);
   color: white;
@@ -218,7 +218,7 @@ body {
   transition: background 0.2s ease;
 }
 
-.see-details-btn:hover {
+.add-to-cart-btn:hover {
   background: var(--color-primary-hover);
 }
 
