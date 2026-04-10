@@ -331,3 +331,182 @@ body {
 .footer-links a:hover {
   color: var(--color-primary);
 }
+
+#events {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* EVENT CARD*/
+.event-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.event-card.expanded {
+  grid-column: span 2;
+}
+
+/*CARD CONTENT */
+.event-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.event-card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* IMAGE PLACEHOLDER */
+.event-card::before {
+  content: "";
+  display: block;
+  height: 200px;
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+}
+
+/* CARD BODY*/
+.event-card > * {
+  padding: 0 0.7rem;
+}
+
+/* BUTTONS */
+button {
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+}
+
+.book-btn {
+  background: #7c3aed;
+  color: white;
+  padding: 1rem 3.5rem;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.book-btn:hover {
+  background: #5b21b6;
+}
+
+.sold-out {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  padding: 1rem 3.5rem;
+  border-radius: 999px;
+  margin: 1.5rem auto 0;
+  display: block;
+  text-align: center;
+}
+
+/*EXPANDED CONTENT */
+.event-card.expanded p {
+  font-size: 1rem;
+}
+
+.full {
+  color: #dc2626;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+/* BOOKING FORM*/
+.booking-form {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.booking-form h4 {
+  margin-bottom: 1rem;
+}
+
+.booking-form input {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.booking-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* TICKET COUNTER*/
+.ticket-counter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ticket-counter button {
+  all: unset;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #111827;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.ticket-counter button:hover {
+  background: #d1d5db;
+}
+
+.ticket-counter span {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.booking-form button[type="submit"] {
+  background: var(--secondary);
+  color: white;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.booking-form button[type="submit"]:hover {
+  background: #db2777;
+}
+
+/*CONFIRMATION*/
+.confirmation {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #16a34a;
+  margin-top: 1rem;
+}
+
+/* TEMP NOTICE*/
+.temp-notice {
+  grid-column: 1 / -1;
+  background: #fef3c7;
+  color: #92400e;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+}
