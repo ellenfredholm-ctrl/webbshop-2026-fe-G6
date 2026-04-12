@@ -16,7 +16,7 @@ const TEMP_EVENTS = [
   },
   {
     id: "2",
-    name: "Organic Produce Workshop",
+    title: "Organic Produce Workshop",
     date: "2024-07-19T10:00:00",
     location: "Hakim Livs Store, Södermalm",
     totalSpots: 30,
@@ -82,10 +82,28 @@ function createEventCard(event) {
 
 function renderCollapsed(card, event) {
   card.innerHTML = `
-    <h3>${event.title}</h3>
-    <p>${formatDate(event.date)}</p>
-    <p>${event.location}</p>
-    <p>Seats left: ${event.seatsLeft}</p>
+  <div class="event-image">
+  <span class="tag category">${event.category}</span>
+  <span class="tag price">$${event.price}</span>
+  <div class="event-pic" style="background-image: ${event.image}, linear-gradient(135deg, #7c3aed, #ec4899)"></div>
+</div>
+ <h3>${event.title}</h3>
+
+<p class="meta">
+  ${icon("calendar")}
+  ${formatDate(event.date)}
+</p>
+
+<p class="meta">
+  ${icon("location")}
+  ${event.location}
+</p>
+
+<p class="meta">
+  ${icon("seats")}
+  Available spots: ${event.seatsLeft}
+</p>
+    <p>Available spots ${event.seatsLeft}</p>
 
     ${
       event.seatsLeft === 0
@@ -93,8 +111,6 @@ function renderCollapsed(card, event) {
         : `<button class="book-btn">Book</button>`
     }
   `;
-
-  stopClickPropagation(card);
 }
 
 /*EXPANDED VIEW */
@@ -102,21 +118,58 @@ function renderCollapsed(card, event) {
 function renderExpanded(card, event) {
   if (event.seatsLeft === 0) {
     card.innerHTML = `
-      <h3>${event.title}</h3>
-      <p>${formatDate(event.date)}</p>
-      <p>${event.location}</p>
+  <div class="event-image">
+  <span class="tag category">${event.category}</span>
+  <span class="tag price">$${event.price}</span>
+  <div class="event-pic" style="background-image: ${event.image}, linear-gradient(135deg, #7c3aed, #ec4899)"></div>
+</div>
+  <div class="event-content">
+     <h3>${event.title}</h3>
+
+<p class="meta">
+  ${icon("calendar")}
+  ${formatDate(event.date)}
+</p>
+
+<p class="meta">
+  ${icon("location")}
+  ${event.location}
+</p>
+
+<p class="meta">
+  ${icon("seats")}
+  Available spots: ${event.seatsLeft}
+</p>
       <p>${event.description}</p>
       <p class="full">This event is fully booked.</p>
       <button class="sold-out" disabled>Sold out</button>
+      </div>
     `;
     return;
   }
 
   card.innerHTML = `
+  <div class="event-image">
+  <span class="tag category">${event.category}</span>
+  <span class="tag price">$${event.price}</span>
+    <div class="event-pic" style="background-image: ${event.image}, linear-gradient(135deg, #7c3aed, #ec4899)"></div>
+</div>
     <h3>${event.title}</h3>
-    <p>${formatDate(event.date)}</p>
-    <p>${event.location}</p>
-    <p>${event.description}</p>
+
+<p class="meta">
+  ${icon("calendar")}
+  ${formatDate(event.date)}
+</p>
+
+<p class="meta">
+  ${icon("location")}
+  ${event.location}
+</p>
+
+<p class="meta">
+  ${icon("seats")}
+  Available spots: ${event.seatsLeft}
+</p>
 
     <form class="booking-form">
       <h4>Book event</h4>
@@ -219,4 +272,28 @@ function formatDate(dateString) {
     dateStyle: "medium",
     timeStyle: "short"
   });
+}
+
+function icon(type) {
+  const icons = {
+    calendar: `
+      <svg viewBox="0 0 24 24">
+        <path d="M7 2v2M17 2v2M3 8h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/>
+      </svg>
+    `,
+    location: `
+      <svg viewBox="0 0 24 24">
+        <path d="M12 21s7-7.75 7-13a7 7 0 10-14 0c0 5.25 7 13 7 13z"/>
+        <circle cx="12" cy="8" r="2.5"/>
+      </svg>
+    `,
+    seats: `
+      <svg viewBox="0 0 24 24">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    `
+  };
+
+  return `<span class="icon ${type}">${icons[type]}</span>`;
 }
