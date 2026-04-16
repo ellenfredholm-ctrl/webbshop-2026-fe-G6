@@ -15,6 +15,6 @@ function handleRegister() {
   const password = document.getElementById("password").value;
 
   // TODO: Call register API when backend is ready
-  console.log("Register:", { name, email });
+  console.log("Register:", { name, email, password });
   alert("Registration functionality not implemented yet");
 }
