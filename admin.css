@@ -22,7 +22,7 @@ h1 {
   text-align: center;
 }
 
-.create-event, .admin-event-list, .event-calendar-box, .recent-events {
+.create-event, .admin-event-list, .event-calendar-box, .recent-events-box {
   background: white;
   border-radius: 20px;
   box-shadow: var(--shadow-md);
@@ -94,13 +94,28 @@ h1 {
   gap: 50px;
 }
 
+
+/* Event-lista och modal pop-up */
+
 .admin-event-list {
   width: 400px;
   text-align: center;
   padding: 0 1.5rem 1.5rem 1.5rem;
 }
 
-.admin-event-list button, .modal-box button {
+.admin-event-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.admin-event-card {
+  border: 2px solid #e5e7eb;
+  border-radius: 6px;
+  box-shadow: var(--shadow-md);
+}
+
+.event-details-btn, .modal-close-btn, .modal-save-btn {
   background: #7c3aed;
   color: white;
   width: 20%;
@@ -113,21 +128,17 @@ h1 {
   font-weight: 600;
 }
 
-.admin-event-list button:hover, .modal-box button:hover {
+.event-details-btn:hover, .modal-close-btn:hover, .modal-save-btn:hover {
   background: #5b21b6;
 }
-.admin-event-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
 
-.admin-event-card {
-  border: 2px solid #e5e7eb;
-  border-radius: 6px;
-  box-shadow: var(--shadow-md);
+.edit-field-btn {
 
 }
+
+
+
+
 
 #event-modal {
   background-color: rgba(117, 116, 116, 0.2);
@@ -144,18 +155,62 @@ h1 {
 }
 
 .modal-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   background-color: #ffffff;
   width: 90%;
   position: relative;
-  max-width: 600px;
+  max-width: 800px;
   margin: 100px auto;
   padding: 10px;
   border-radius: 8px;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
 }
 
+.modal-box textarea {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  resize: none;
+  overflow: hidden;
+}
 
+.modal-box textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
 
+.modal-content {
+  display: flex;
+}
+
+.modal-field {
+  display: flex;
+  gap: 6px;
+  
+
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-right: 100px;
+}
+
+.rigth-modal {
+  display: flex;
+}
 
 
 /* Calendar */
@@ -261,7 +316,7 @@ h1 {
 
 
 /* Recent Events - Event History */
-.recent-events {
+.recent-events-box {
   width: 400px;
   text-align: center;
 }

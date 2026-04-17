@@ -11,13 +11,12 @@ form.addEventListener("submit", async (e) => {
   const location = document.getElementById("location").value.trim();
   const totalSpots = parseInt(document.getElementById("total-spots").value, 10);
   const category = document.getElementById("category").value.trim();
-  // const price = parseFloat(document.getElementById("price").value);
+  const price = parseFloat(document.getElementById("price").value);
   // const image = document.getElementById("image").value.trim();
-  // const slug = document.getElementById("slug").value.trim();
 
   try {
     await createEvent({ title, description, date, location, totalSpots, category});
-    // await createEvent({ title, description, date, location, totalSpots, category, image, slug });
+    // await createEvent({ title, description, date, location, totalSpots, category, image, });
     form.reset();
     loadEvents();
   } catch (err) {
@@ -28,26 +27,26 @@ form.addEventListener("submit", async (e) => {
 
 //test för events
 let events = [];
-const someEvents = [
-  {title: "Spökvandring i Gamla Stan", description: "Spökvandring", date: "2026-04-16T00:00:00.000Z", location: "Stockholm", totalSpots: 16, bookedSpots: 8, category: "Guidade turer"},
-  {title: "Celine Dion Live på Avicii Arena", description: "Konsert wihoo", date: "2026-04-18T00:00:00.000Z", location: "Stockholm", totalSpots: 20000, bookedSpots: 18000, category: "Livemusik"},
-  {title: "Fiska med oss", description: "Dagsfiske i Göteborgs hamn", date: "2026-04-20T00:00:00.000Z", location: "Göteborg", totalSpots: 24, bookedSpots: 4, category: "Utomhusaktiviteter"},
-  {title: "Hitta din inre kraft", description: "En wellness-resa med oss i skogen, häng med", date: "2026-04-22T00:00:00.000Z", location: "Skogen", totalSpots: 40, bookedSpots: 2, category: "Hälsa"},
+// const testEvents = [
+//   {_id: "1", title: "Spökvandring i Gamla Stan", description: "Spökvandring", date: "2026-04-16T00:00:00.000Z", location: "Stockholm", totalSpots: 16, bookedSpots: 8, category: "Guidade turer"},
+//   {_id: "2", title: "Celine Dion Live på Avicii Arena", description: "Konsert wihoo", date: "2026-04-18T00:00:00.000Z", location: "Stockholm", totalSpots: 20000, bookedSpots: 18000, category: "Livemusik"},
+//   {_id: "3", title: "Fiska med oss", description: "Dagsfiske i Göteborgs hamn", date: "2026-04-20T00:00:00.000Z", location: "Göteborg", totalSpots: 24, bookedSpots: 4, category: "Utomhusaktiviteter"},
+//   {_id: "4", title: "Hitta din inre kraft", description: "En wellness-resa med oss i skogen, häng med", date: "2026-04-22T00:00:00.000Z", location: "Skogen", totalSpots: 40, bookedSpots: 2, category: "Hälsa"},
   
-];
+// ];
 
 
 async function loadEvents() {
-  eventCardsContainer.innerHTML = "<p>Loading...<p>";
+  eventCardsContainer.innerHTML = "<p>Loading...</p>";
   try {
-    // events = await getEvents();
-      events = someEvents;
+    events = await getEvents();
+      // events = testEvents;
     if (events.length === 0) {
       eventCardsContainer.innerHTML = "<p>No events yet.</p>";
       return;
     }
-    eventCardsContainer.innerHTML = events.map((p, index) =>
-      `<div class="admin-event-card" data-index="${index}"><p>${p.title}</p><button class="event-details-btn">View</button></div>`
+    eventCardsContainer.innerHTML = events.map((p) =>
+      `<div class="admin-event-card" data-event-id="${p._id}"><p>${p.title}</p><button class="event-details-btn">View</button></div>`
       )
       .join("");
   } catch (err){
@@ -56,18 +55,75 @@ async function loadEvents() {
   }
 }
 
-//modal pop-up för event-details
+//modal pop-up för event-details och edit
 const eventModal = document.createElement('div');
 eventModal.id = 'event-modal';
 
 const eventModalBox = document.createElement('div');
 eventModalBox.classList.add('modal-box');
 
-function createModalField(label, value) {
-  const p = document.createElement('p');
-  p.textContent = `${label}: ${value}`;
-  eventModalBox.appendChild(p);
-  return p;
+const eventModalContent = document.createElement('div');
+eventModalContent.classList.add('modal-content');
+
+const eventModalFooter = document.createElement('div');
+eventModalFooter.classList.add('modal-footer');
+
+const modalBoxLeft = document.createElement('div');
+modalBoxLeft.classList.add('left-modal');
+
+const modalBoxRight = document.createElement('div');
+modalBoxRight.classList.add('right-modal');
+
+eventModalBox.appendChild(eventModalContent);
+eventModalBox.appendChild(eventModalFooter);
+eventModalContent.appendChild(modalBoxLeft);
+eventModalContent.appendChild(modalBoxRight);
+
+
+function createModalField(label, value, onEdit) {
+  const fieldWrapper = document.createElement('div');
+  fieldWrapper.classList.add('modal-field');
+  const fieldLabel = document.createElement('span');    
+  fieldLabel.textContent = `${label}: `;
+  const fieldValue = document.createElement('span');
+  fieldValue.textContent = `${value}`;
+  const editBtn = document.createElement('button');
+  editBtn.innerHTML = `<span class="material-symbols-outlined">edit</span>`;
+  editBtn.classList.add('edit-field-btn');
+
+  editBtn.addEventListener('click', () => {
+    //för bookedspots
+    if(onEdit) {
+      onEdit();
+    } else {
+      //för alla andra
+      const input = document.createElement('textarea');
+      input.value = fieldValue.textContent;
+      input.rows = 1;
+
+      input.addEventListener('input', () => {
+        input.style.height = 'auto';
+        input.style.height = `${input.scrollHeight}px`;
+      })
+
+      fieldValue.replaceWith(input);
+      input.focus();
+
+      input.addEventListener('blur', () => {
+        fieldValue.textContent = input.value;
+        input.replaceWith(fieldValue);
+      })
+
+
+    }
+
+  })
+
+  fieldWrapper.appendChild(fieldLabel);
+  fieldWrapper.appendChild(fieldValue);
+  fieldWrapper.appendChild(editBtn);
+  modalBoxLeft.appendChild(fieldWrapper);
+  return fieldValue;
 }
 
 const eventTitle = createModalField('Title', '');
@@ -75,19 +131,34 @@ const eventDescription = createModalField('Description', '');
 const eventDate = createModalField('Date', '');
 const eventLocation = createModalField('Location', '');
 const eventTotalSpots = createModalField('Total spots', '');
-const eventBookedSpots = createModalField('Booked spots', '');
+const eventBookedSpots = createModalField('Booked spots', '', () => {
+  
+  const existing = document.querySelector('.bookings-panel');
+  if (existing) {
+    return;
+  }
+
+  const bookingsPanel = document.createElement('div');
+  bookingsPanel.classList.add('bookings-panel');
+  bookingsPanel.innerHTML = `<p>Här är alla bokningar osv</p>`;
+  modalBoxRight.appendChild(bookingsPanel);
+});
 const eventCategory = createModalField('Category', '');
-// const eventPrice = createModalField('', '');
+const eventPrice = createModalField('Price', '');
 
 
 
 const closeEventModalBtn = document.createElement('button');
 closeEventModalBtn.textContent = "Close";
-//och ha en save button för att spara ändringar man gjort
+closeEventModalBtn.classList.add('modal-close-btn');
 
-eventModalBox.appendChild(closeEventModalBtn);
+const saveEventEditBtn = document.createElement('button');
+saveEventEditBtn.textContent = "Save";
+saveEventEditBtn.classList.add('modal-save-btn');  //TODO: bara få upp save button om man ändrat nåt?
+
+eventModalFooter.appendChild(closeEventModalBtn);
+eventModalFooter.appendChild(saveEventEditBtn);
 eventModal.appendChild(eventModalBox);
-
 
 function openModal() {
   eventModal.classList.add('show');
@@ -102,16 +173,16 @@ document.body.appendChild(eventModal);
 eventCardsContainer.addEventListener('click', (e) => {
   if (e.target.classList.contains('event-details-btn')) {
     const card = e.target.closest('.admin-event-card');
-    const index = card.dataset.index;
-    const event = events[index];
-    eventTitle.textContent = `Title: ${event.title}`;
-    eventDescription.textContent = `Description: ${event.description}`;
-    eventDate.textContent = `Date: ${new Date(event.date).toLocaleDateString()}`;
-    eventLocation.textContent = `Location: ${event.location}`;
-    eventTotalSpots.textContent = `Total spots: ${event.totalSpots}`;
-    eventBookedSpots.textContent = `Booked spots: ${event.bookedSpots}`;
-    eventCategory.textContent = `Category: ${event.category}`;
-    // eventPrice.textContent = `Price: ${product.price}`;
+    const eventId = card.dataset.eventId;
+    const event = events.find(e => e._id === eventId);
+    eventTitle.textContent = event.title;
+    eventDescription.textContent = event.description;
+    eventDate.textContent = new Date(event.date).toLocaleDateString();
+    eventLocation.textContent = event.location;
+    eventTotalSpots.textContent = event.totalSpots;
+    eventBookedSpots.textContent = event.bookedSpots;
+    eventCategory.textContent = event.category;
+    eventPrice.textContent = event.price;
     openModal();
     
   }
@@ -140,7 +211,6 @@ function findEventsByDay(day) {
     const eventDate = new Date(event.date);
     return (eventDate.getFullYear() === currentYear && eventDate.getMonth() === currentMonth && eventDate.getDate() === day);
   })
-      
 }
 
 function updateHeader() {
@@ -224,9 +294,28 @@ calendarDate.addEventListener('click', (e) => {
   } else {
     dayEventsPanel.innerHTML = `<p>No events</p>`;
   }
-
-  
 })
+
+
+//Recent events - historik över "gamla" event
+const recentEventsContainer = document.getElementById('recent-events');
+function loadRecentEvents() {
+  const today = new Date();
+  const pastEvents = events.filter(event => new Date(event.date) < today);
+  if(pastEvents.length === 0) {
+    recentEventsContainer.innerHTML = "<p>No historic events to show</p>";
+    return;
+  }
+
+    recentEventsContainer.innerHTML = pastEvents.map(event => 
+    `<div class="recent-event-item">
+      <p>Event: ${event.title}</p>
+      <p>Happened: ${new Date(event.date).toDateString()} in ${event.location}</p>
+    </div>`).join("");
+}
+
+
+
 
 
 function renderCalendar() {
@@ -237,9 +326,11 @@ function renderCalendar() {
 document.addEventListener("DOMContentLoaded", async () => {
   await loadEvents();
   renderCalendar();
+  loadRecentEvents();
 });
 
 
 
 
-//Recent events - historik över "gamla" event
+
+
