@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", loadEvents);
 
-const API_EVENTS = "https://webb-projekt-2026.vercel.app/events";
-const API_BOOKINGS = "https://webb-projekt-2026.vercel.app/events";
+const API_EVENTS = "https://webb-projekt-2026-dun.vercel.app/events";
+const API_BOOKINGS = "https://webb-projekt-2026-dun.vercel.app/events";
 
 const TEMP_EVENTS = [
   {
@@ -178,7 +178,7 @@ function renderExpanded(card, event) {
       <input name="email" type="email" placeholder="Email" required />
       <input name="phone" placeholder="Phone number" required />
 
-      <label>Tickets</label>
+      <label class="ticket-counter">Tickets</label>
       <div class="ticket-counter">
         <button type="button" class="decrease">−</button>
         <span class="count">1</span>
