@@ -1,5 +1,5 @@
 const API = {
-  BASE_URL: 'https://webb-projekt-2026.vercel.app/',
+  BASE_URL: 'https://webb-projekt-2026-dun.vercel.app/events',
 
   async register(name, email, password) {
     const response = await fetch(`${this.BASE_URL}register`, {
