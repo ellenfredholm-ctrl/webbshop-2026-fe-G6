@@ -116,6 +116,10 @@ button {
   margin-bottom: 1rem;
 }
 
+.ticket-counter label {
+    margin-bottom: 0.5rem;
+}
+
 .ticket-counter button {
   all: unset;
   width: 36px;
@@ -243,4 +247,8 @@ button {
 
 .icon.seats {
   color: #10b981;
+}
+
+p {
+    color: white;
 }
