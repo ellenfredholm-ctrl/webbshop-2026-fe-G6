@@ -6,25 +6,45 @@
     <title>Eventera - Events</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="event.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
   </head>
   <body>
 
-     <header class="site-header">
-      <nav>
-<a href="index.html" class="logo">EVENTERA</a>
-        <ul class="nav-links">
-          <li><a href="products.html">Events</a></li>
-          <li><a href="register.html">Log in</a></li>
-          <li><a href="admin.html">Admin</a></li>
-        </ul>
-      </nav>
-    </header>
+    <header class="site-header">
+  <nav>
+
+    <a href="index.html" class="logo">EVENTERA</a>
+
+    <div class="navigation">
+      <!-- checkbox -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-controls="main-menu">
+
+      <!-- burger -->
+      <label for="menu-toggle" class="burger" aria-label="navigation">
+  <span></span>
+  <span></span>
+  <span></span>
+</label>
+
+
+      <!-- meny -->
+      <ul class="nav-links" id="main-menu">
+        <li><a href="events.html">Events</a></li>
+        <li><a href="about.html" class="active">About us</a></li>
+        <li><a href="register.html">Log in</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </div>
+
+  </nav>
+</header>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
       <h1>Events</h1>
       <div id="events"></div>
     </main>
+    
 
     <!-- FOOTER -->
     <footer class="site-footer">
