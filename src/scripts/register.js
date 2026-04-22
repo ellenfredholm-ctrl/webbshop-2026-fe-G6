@@ -1,18 +1,23 @@
 const API = {
-  BASE_URL: "https://webb-projekt-2026-dun.vercel.app/users",
+  BASE_URL: "https://webb-projekt-2026-dun.vercel.app/",
 
-  async register(name, email, password) {
-    const response = await fetch(`${this.BASE_URL}`, {
+  async register(name, email, password, role = "user", adminSecret = null) {
+    const body = {name, email, password, role};
+    if (adminSecret) body.adminSecret = adminSecret;
+
+     console.log('sending:', body);
+
+    const response = await fetch(`${this.BASE_URL}auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password, role: "user" }),
+      body: JSON.stringify(body),
     });
     if (!response.ok) throw new Error("Registration failed");
     return response.json();
   },
 
   async login(email, password) {
-    const response = await fetch(`${this.BASE_URL}login`, {
+    const response = await fetch(`${this.BASE_URL}auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -92,12 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
     registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const name     = document.getElementById("name").value.trim();
-      const email    = document.getElementById("email").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
+      const adminSecret = document.getElementById("adminSecret")?.value.trim();
+      const role = adminSecret ? "admin" : "user";
 
       try {
-        await API.register(name, email, password);
+        await API.register(name, email, password, role, adminSecret);
         registerContainer.style.display = "none";
         loginContainer.style.display    = "block";
         if (registerTitle) registerTitle.style.display = "none";

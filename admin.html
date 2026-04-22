@@ -9,16 +9,35 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_drop_down,delete,edit,keyboard_arrow_left,keyboard_arrow_right" />
   </head>
   <body>
+
     <header class="site-header">
-      <nav>
-        <a href="index.html" class="logo">Eventera</a>
-        <ul class="nav-links">
-          <li><a href="events.html">Events</a></li>
-          <li><a href="register.html">Register</a></li>
-          <li><a href="admin.html">Admin</a></li>
-        </ul>
-      </nav>
-    </header>
+  <nav>
+
+    <a href="index.html" class="logo">EVENTERA</a>
+
+    <div class="navigation">
+      <!-- checkbox -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-controls="main-menu">
+
+      <!-- burger -->
+      <label for="menu-toggle" class="burger" aria-label="navigation">
+  <span></span>
+  <span></span>
+  <span></span>
+</label>
+
+
+      <!-- meny -->
+      <ul class="nav-links" id="main-menu">
+        <li><a href="events.html">Events</a></li>
+        <li><a href="about.html" class="active">About us</a></li>
+        <li><a href="register.html">Log in</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </div>
+
+  </nav>
+</header>
     
     
     <main class="admin-main">
@@ -75,6 +94,7 @@
                 </ul>
               </div>
               <div class="search-tooltip">
+                
                 <input type="text" id="search-input" placeholder="Search events"/>
                 <span class="tooltip-text">Search by title, description or location</span>
               </div>
@@ -116,6 +136,17 @@
         </div>
       </div>
     </main>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p>&copy; 2026 EVENTERA. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <a href="/terms">Terms</a>
+        </div>
+      </div>
+    </footer>
 
     <script type="module" src="./src/scripts/admin.js"></script>
   </body>

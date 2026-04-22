@@ -596,8 +596,26 @@ function renderCalendar() {
   dayEventsPanel.innerHTML = '';
   dayEventsPanel.classList.remove('open');
 }
+function logOut() {
+  localStorage.removeItem('token');
+  window.location.href = 'register.html';
+}
+
+const logOutBtn = document.createElement('button');
+logOutBtn.classList.add('logout-btn');
+logOutBtn.textContent = "Log out";
+logOutBtn.addEventListener('click', () => {
+  logOut();
+})
+
+document.querySelector('.site-header nav').appendChild(logOutBtn);
 
 document.addEventListener("DOMContentLoaded", async () => {
+  // const token = localStorage.getItem('token');
+  // if (!token) {
+  //   window.location.href = 'register.html';
+  //   return;
+  // }
   await loadEvents();
   renderCalendar();
   loadRecentEvents();

@@ -1,4 +1,20 @@
 /* Admin*/
+.logout-btn {
+  background: transparent;
+  color: white;
+  width: 10%;
+  padding: 0.4rem;
+  border: 2px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+}
+
+.logout-btn:hover {
+  background: white;
+  color: #5b21b6;
+}
 .admin-main {
   display: flex;
   flex-direction: column;
@@ -57,7 +73,7 @@ h1 {
 }
 
 .admin-form-row {
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
 }
 
 .admin-form-row label {
@@ -117,7 +133,7 @@ h1 {
   width: 100%;
   text-align: center;
   padding: 1.5rem;
-  max-height: 900px;
+  max-height: 1000px;
   background: white;
   border-radius: 20px;
   box-shadow: var(--shadow-md);
@@ -128,7 +144,7 @@ h1 {
 
 .filter-search {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-bottom: 1rem;
   overflow: visible;
 }
@@ -177,12 +193,13 @@ h1 {
 }
 
 #search-input {
-  width: 80%;
+  width: 90%;
   padding: 0.34rem 0.4rem;
   border-radius: 4px;
   border: 1px solid #5b21b6;
   font-size: 0.9rem;
   font-family: "DM Sans", system-ui, sans-serif;
+  margin-left: 16px;
 }
 
 #search-input:focus {
@@ -300,7 +317,9 @@ h1 {
 }
 
 .edit-field-btn {
-
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
 }
 
 #event-modal {
@@ -430,8 +449,8 @@ h1 {
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  border: 2px solid black;
-  padding: 0.8rem;
+  border: 2px solid #e5e7eb;
+  padding: 1rem;
   align-items: center;
   overflow-y: auto;
   max-height: 500px;

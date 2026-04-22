@@ -10,10 +10,14 @@ export async function getEvents() {
 }
 
 export async function createEvent(event) {
+  const token = localStorage.getItem('token');
   const url = new URL("events", getBaseUrl());
   const response = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
     body: JSON.stringify(event),
   });
   if (response.ok) {
@@ -23,12 +27,15 @@ export async function createEvent(event) {
   throw new Error(err.errors?.[0]?.msg || "Failed to create event");
 }
 
-//en updateEvent för redigering av events
 export async function updateEvent(id, updatedData) {
+  const token = localStorage.getItem('token');
   const url = new URL(`events/${id}`, getBaseUrl());
   const response = await fetch(url, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
     body: JSON.stringify(updatedData),
   });
   if (response.ok) {
@@ -39,9 +46,13 @@ export async function updateEvent(id, updatedData) {
 }
 
 export async function deleteEvent(id) {
+  const token = localStorage.getItem('token');
   const url = new URL(`events/${id}`, getBaseUrl());
   const response = await fetch(url, {
     method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
   });
   if (response.ok) {
     return response.json().catch(() => ({}));

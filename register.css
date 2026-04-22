@@ -1,7 +1,7 @@
 
 body {
     margin: 0;
-    font-family: 'Inter', sans-serif; 
+    font-family: var(--font-body); 
     background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f97316 100%);
     background-attachment: fixed;
     min-height: 100vh;
@@ -89,6 +89,7 @@ h2 {
     background-color: #f9fafb;
     transition: all 0.2s;
     box-sizing: border-box;
+    font-family: var(--font-body);
 }
 
 .form-group input:focus {
@@ -213,6 +214,13 @@ button[type="submit"]::after {
 
 #forgotPasswordForm button[type="submit"]:hover {
   background: #db2777;
+}
+
+#forgotEmail:focus {
+    outline: none;
+    border-color: #a855f7;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
 }
 
 .auth-header {
