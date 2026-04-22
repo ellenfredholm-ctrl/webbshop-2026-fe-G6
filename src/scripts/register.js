@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const data = await API.login(email, password);
         localStorage.setItem("token", data.token);
-        window.location.href = "my-profile.html";
+        window.location.href = "admin.html";
       } catch (err) {
         alert(err.message);
       }
