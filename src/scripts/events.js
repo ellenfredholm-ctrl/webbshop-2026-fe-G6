@@ -4,6 +4,7 @@ const API_EVENTS = "https://webb-projekt-2026-dun.vercel.app/events";
 const API_BOOKINGS = "https://webb-projekt-2026-dun.vercel.app/bookings";
 const params = new URLSearchParams(window.location.search);
 const expandedEventId = params.get("eventId");
+let allEvents = [];
 
 const TEMP_EVENTS = [
   {
@@ -35,16 +36,15 @@ async function loadEvents() {
   const container = document.getElementById("events");
   container.innerHTML = "<p>Loading events...</p>";
 
-  let events = [];
   let isTemp = false;
 
   try {
     const res = await fetch(API_EVENTS);
     if (!res.ok) throw new Error();
 
-    events = await res.json();
+    allEvents = await res.json();
   } catch {
-    events = TEMP_EVENTS;
+    allEvents = TEMP_EVENTS;
     isTemp = true;
   }
 
@@ -57,7 +57,7 @@ async function loadEvents() {
     container.appendChild(notice);
   }
 
-events.forEach(event => {
+  allEvents.forEach(event => {
   event.seatsLeft = event.totalSpots - event.bookedSpots;
 
   const card = createEventCard(event);
@@ -334,3 +334,45 @@ function icon(type) {
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const searchForm = document.getElementById("search-form");
+  const searchInput = document.getElementById("search-input");
+
+  // Sök när man trycker Enter
+  searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    filterEvents();
+  });
+
+  // Live-sök (valfritt men bra UX)
+  searchInput.addEventListener("input", filterEvents);
+});
+
+function filterEvents() {
+  const searchInput = document
+    .getElementById("search-input")
+    .value
+    .toLowerCase();
+
+  const filtered = allEvents.filter(ev => {
+    let matchesSearch = true;
+
+    if (searchInput) {
+      matchesSearch =
+        ev.title.toLowerCase().includes(searchInput) ||
+        ev.location.toLowerCase().includes(searchInput) ||
+        ev.description.toLowerCase().includes(searchInput);
+    }
+
+    return matchesSearch;
+  });
+
+  const container = document.getElementById("events");
+  container.innerHTML = "";
+
+  filtered.forEach(event => {
+    const card = createEventCard(event);
+    container.appendChild(card);
+  });
+}
