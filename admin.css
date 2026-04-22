@@ -34,14 +34,14 @@
 
 h1 {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: 600;
   color: white;
   letter-spacing: -0.02em;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2.9rem;
+  padding: 1rem 5.4rem;
 }
 
 .admin-main h2 {
@@ -113,7 +113,7 @@ h1 {
 }
 
 .admin-form button:hover {
-  background: #5b21b6;
+  background: rgb(170, 101, 249);
 }
 
 .admin-left-section {
@@ -291,7 +291,7 @@ h1 {
 }
 
 .event-details-btn:hover, .modal-close-btn:hover, .modal-save-btn:hover {
-  background: #5b21b6;
+  background: rgb(170, 101, 249);
 }
 
 .delete-event-btn {
@@ -747,4 +747,11 @@ h1 {
     width: 100%
   }
 
+  .logout-btn {
+    width: 16%;
+  }
+
+  h1 {
+    padding-left: 2rem;
+  }
 }
