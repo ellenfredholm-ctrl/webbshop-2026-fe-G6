@@ -6,6 +6,7 @@
     <title>Eventera - Events</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="event.css">
+    <script type="module" src="./src/scripts/nav.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
   </head>
   <body>
@@ -28,12 +29,14 @@
 
 
       <!-- meny -->
-      <ul class="nav-links" id="main-menu">
-        <li><a href="events.html">Events</a></li>
-        <li><a href="about.html" class="active">About us</a></li>
-        <li><a href="register.html">Log in</a></li>
-        <li><a href="admin.html">Admin</a></li>
-      </ul>
+     <ul class="nav-links" id="main-menu">
+    <li><a href="events.html">Events</a></li>
+    <li><a href="about.html" class="active">About us</a></li>
+    <li class="nav-login-link"><a href="register.html">Log in</a></li>
+    <li class="nav-myprofile-link"><a href="my-profile.html">My Profile</a></li>
+    <li class="nav-admin-link"><a href="admin.html">Admin</a></li>
+    <li class="nav-logout-link" style="display: none;"><a href="#">Log out</a></li>
+</ul>
     </div>
 
   </nav>
