@@ -96,7 +96,9 @@ export function renderCollapsed(card, event) {
   <div class="event-image">
   <span class="tag category">${event.category}</span>
   <span class="tag price">$${event.price}</span>
-  <div class="event-pic" style="background-image: ${event.image}, linear-gradient(135deg, #7c3aed, #ec4899)"></div>
+  <div class="event-pic" style="background-image: ${event.image 
+  ? `url(${event.image})` 
+  : 'linear-gradient(135deg, #7c3aed, #ec4899)'}"></div>
 </div>
  <h3>${event.title}</h3>
 
@@ -132,7 +134,9 @@ function renderExpanded(card, event) {
   <div class="event-image">
   <span class="tag category">${event.category}</span>
   <span class="tag price">$${event.price}</span>
-  <div class="event-pic" style="background-image: ${event.image}, linear-gradient(135deg, #7c3aed, #ec4899)"></div>
+  <div class="event-pic" style="background-image: ${event.image 
+  ? `url(${event.image})` 
+  : 'linear-gradient(135deg, #7c3aed, #ec4899)'}"></div>
 </div>
   <div class="event-content">
      <h3>${event.title}</h3>
@@ -163,7 +167,9 @@ function renderExpanded(card, event) {
   <div class="event-image">
   <span class="tag category">${event.category}</span>
   <span class="tag price">$${event.price}</span>
-    <div class="event-pic" style="background-image: ${event.image}, linear-gradient(135deg, #7c3aed, #ec4899)"></div>
+    <div class="event-pic" style="background-image: ${event.image 
+  ? `url(${event.image})` 
+  : 'linear-gradient(135deg, #7c3aed, #ec4899)'}"></div>
 </div>
     <h3>${event.title}</h3>
 
@@ -181,7 +187,7 @@ function renderExpanded(card, event) {
   ${icon("seats")}
   Available spots: ${event.seatsLeft}
 </p>
-
+<p>${event.description}</p>
     <form class="booking-form">
       <h4>Book event</h4>
 

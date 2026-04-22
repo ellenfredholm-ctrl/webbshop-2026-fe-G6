@@ -353,8 +353,9 @@ align-items: center;
      width: 100%;
   padding: 0.65rem 0.75rem;
   border-radius: 10px;
-  border: 1px solid #d1d5db;
+  border: 2px solid #d1d5db;
   margin-bottom: 2rem;
   font-size: 0.9rem;
+  background-color: #eff0f0;
 }
 
