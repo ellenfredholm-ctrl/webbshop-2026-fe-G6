@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EVENTERA</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="event.css">
+    <link rel="stylesheet" href="karusell.css">
      <script src="https://unpkg.com/lucide@latest"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
   </head>
   <body>
 
     <!-- HEADER -->
+<<<<<<< HEAD
      <header class="site-header">
       <nav>
 <a href="index.html" class="logo">EVENTERA</a>
@@ -20,6 +24,36 @@
         </ul>
       </nav>
     </header>
+=======
+ <header class="site-header">
+  <nav>
+
+    <a href="index.html" class="logo">EVENTERA</a>
+
+    <div class="navigation">
+      <!-- checkbox -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-controls="main-menu">
+
+      <!-- burger -->
+      <label for="menu-toggle" class="burger" aria-label="navigation">
+  <span></span>
+  <span></span>
+  <span></span>
+</label>
+
+
+      <!-- meny -->
+      <ul class="nav-links" id="main-menu">
+        <li><a href="events.html">Events</a></li>
+        <li><a href="about.html" class="active">About us</a></li>
+        <li><a href="register.html">Log in</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </div>
+
+  </nav>
+</header>
+>>>>>>> 1b9f2c249108785915919d304b312410d5f3004c
 
 
     <!-- HERO (full width) -->
@@ -29,10 +63,25 @@
     </section>
 
     <!-- MAIN CONTENT -->
-    <main class="main-content">
-      <h1>Featured events</h1>
-      <div id="products"></div>
-    </main>
+<main class="main-content">
+  <h1>Featured events</h1>
+
+  <div class="carousel-3d">
+
+    <!-- Prev / Next buttons -->
+    <div class="carousel-nav">
+      <button id="carousel-prev" class="carousel-btn" aria-label="Previous">&#8592;</button>
+      <button id="carousel-next" class="carousel-btn" aria-label="Next">&#8594;</button>
+    </div>
+
+    <!-- Cards go here -->
+    <div id="featured-events" class="carousel-3d-track"></div>
+
+    <!-- Dot indicators -->
+    <div id="carousel-dots"></div>
+
+  </div>
+</main>
 
     <!-- FOOTER -->
     <footer class="site-footer">

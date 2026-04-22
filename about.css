@@ -1,0 +1,110 @@
+body {
+    justify-content: center;
+}
+h2 {
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.subtitle {
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.about-card {
+  background: white;
+  width: 100%;
+  padding: 3rem;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  margin-top: 3rem;
+}
+
+.about-card h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  color: #111827;
+}
+
+.about-card p {
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+
+.values {
+  display: flex;
+  justify-content: space-between;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.value {
+  background: white;
+  backdrop-filter: blur(6px);
+  padding: 1.8rem;
+  border-radius: 20px;
+  text-align: center;
+  width: 30%;
+}
+
+.value h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.value p {
+  font-size: 0.95rem;
+  color: #374151;
+}
+#laugh  {
+  color: #7c3aed;
+  margin-right: 0.5rem;
+  margin-bottom: -0.3rem;
+}
+
+#balloon {
+  color: #f97316;
+   margin-right: 0.5rem;
+  margin-bottom: -0.3rem;
+}
+
+#users{
+  color: #10b981;
+   margin-right: 0.5rem;
+  margin-bottom: -0.3rem;
+}
+
+#timer {
+  color: #05c6e3;
+  margin-right: 0.5rem;
+  margin-bottom: -0.3rem;
+}
+
+#zap {
+  color: #e3d003;
+   margin-right: 0.5rem;
+  margin-bottom: -0.3rem;
+}
+
+#handshake {
+  color: #f902bf;
+   margin-right: 0.5rem;
+  margin-bottom: -0.3rem;
+}
+
+@media (max-width: 768px) {
+
+    .values {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .value {
+        width: 100%;
+    }
+}

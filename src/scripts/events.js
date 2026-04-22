@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", loadEvents);
 
 const API_EVENTS = "https://webb-projekt-2026-dun.vercel.app/events";
-const API_BOOKINGS = "https://webb-projekt-2026-dun.vercel.app/events";
+const API_BOOKINGS = "https://webb-projekt-2026-dun.vercel.app/bookings";
+const params = new URLSearchParams(window.location.search);
+const expandedEventId = params.get("eventId");
 
 const TEMP_EVENTS = [
   {
@@ -55,10 +57,19 @@ async function loadEvents() {
     container.appendChild(notice);
   }
 
-  events.forEach(event => {
-    event.seatsLeft = event.totalSpots - event.bookedSpots;
-    container.appendChild(createEventCard(event));
-  });
+events.forEach(event => {
+  event.seatsLeft = event.totalSpots - event.bookedSpots;
+
+  const card = createEventCard(event);
+  container.appendChild(card);
+
+  const id = event._id || event.id;
+
+  if (id === expandedEventId) {
+    card.classList.add("expanded");
+    renderExpanded(card, event);
+  }
+});
 }
 
 
@@ -80,7 +91,7 @@ function createEventCard(event) {
 
 /*  COLLAPSED VIEW */
 
-function renderCollapsed(card, event) {
+export function renderCollapsed(card, event) {
   card.innerHTML = `
   <div class="event-image">
   <span class="tag category">${event.category}</span>
@@ -103,7 +114,7 @@ function renderCollapsed(card, event) {
   ${icon("seats")}
   Available spots: ${event.seatsLeft}
 </p>
-    <p>Available spots ${event.seatsLeft}</p>
+    
 
     ${
       event.seatsLeft === 0
@@ -188,7 +199,22 @@ function renderExpanded(card, event) {
 
       <button type="submit">Confirm booking</button>
     </form>
+
+         <div class="confirmation">
+      <div class="check-animation">
+        <svg viewBox="0 0 52 52">
+          <circle class="circle" cx="26" cy="26" r="25"
+            fill="none" stroke="#16a34a" stroke-width="3"/>
+          <path class="check" fill="none" stroke="#16a34a" stroke-width="3"
+            d="M14 27 l7 7 l17 -17"/>
+        </svg>
+      </div>
+      <p>Booking confirmed!</p>
+    
+    </div>
+</div>
   `;
+
 
   setupTicketCounter(card, event);
   setupBooking(card, event);
@@ -238,9 +264,9 @@ function setupBooking(card, event) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          eventId: event.id,
+          event: event._id,
           ...data,
-          seats: Number(data.seats)
+          quantity: Number(data.seats)
         })
       });
 
@@ -248,18 +274,25 @@ function setupBooking(card, event) {
 
       event.seatsLeft -= Number(data.seats);
 
-      card.innerHTML = `
-        <h3>${event.tiitle}</h3>
-        <p class="confirmation">
-          ✅ Thank you ${data.name}! Your booking is confirmed.
-        </p>
-      `;
+      form.classList.add("hidden");
+
+      const confirmation = card.querySelector(".confirmation");
+      const circle = confirmation.querySelector(".circle");
+      const check = confirmation.querySelector(".check");
+
+      confirmation.classList.add("visible");
+
+      void circle.offsetWidth;
+      void check.offsetWidth;
+
+      circle.classList.add("animate");
+      check.classList.add("animate");
 
     } catch {
       alert("Booking failed. Please try again.");
     }
   });
-}
+} 
 
 function stopClickPropagation(card) {
   card.querySelectorAll("button, form, input").forEach(el => {
@@ -293,7 +326,11 @@ function icon(type) {
         <circle cx="12" cy="7" r="4"/>
       </svg>
     `
-  };
+  }; 
 
-  return `<span class="icon ${type}">${icons[type]}</span>`;
-}
+  return `<span class="icon ${type}">${icons[type]}</span>`; 
+} 
+
+document.addEventListener("DOMContentLoaded", () => {
+  lucide.createIcons();
+});
