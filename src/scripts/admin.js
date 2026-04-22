@@ -162,7 +162,7 @@ eventModalContent.appendChild(modalBoxRight);
 let currentEventId = null;
 
 //     -Creating modal field-
-function createModalField(label, value, onEdit, type = 'text') {
+function createModalField(label, value, onEdit, type = 'text', readMore = false) {
   const fieldWrapper = document.createElement('div');
   fieldWrapper.classList.add('modal-field');
   const fieldLabel = document.createElement('span');    
@@ -207,8 +207,14 @@ function createModalField(label, value, onEdit, type = 'text') {
         input.focus();
 
         input.addEventListener('blur', () => {
-          fieldValue.textContent = input.value;
+          const newText = input.value;
           input.replaceWith(fieldValue);
+          if (readMore) {
+            textFieldReadMore(fieldValue, newText);
+          } else {
+            fieldValue.textContent = newText;
+          }
+
         })
       }
 
@@ -223,11 +229,13 @@ function createModalField(label, value, onEdit, type = 'text') {
 }
 
 const eventTitle = createModalField('Title', '');
-const eventDescription = createModalField('Description', '');
+const eventDescription = createModalField('Description', '', undefined, 'text', true);
 const eventDate = createModalField('Date', '', undefined, 'date');
 const eventPrice = createModalField('Price', '');
 const eventLocation = createModalField('Location', '');
 const eventTotalSpots = createModalField('Total spots', '');
+const eventImage = createModalField('Image URL', '');
+eventImage.classList.add('url-field');
 
 //     - Edit booked spots -
 const eventBookedSpots = createModalField('Booked spots', '', async () => {
@@ -376,6 +384,7 @@ eventCardsContainer.addEventListener('click', (e) => {
     eventTotalSpots.textContent = event.totalSpots;
     eventBookedSpots.textContent = event.bookedSpots;
     eventCategory.textContent = event.category;
+    eventImage.textContent = event.image || '';
     
     openModal();
   }
@@ -395,7 +404,8 @@ saveEventEditBtn.addEventListener('click', async () => {
       price: parseFloat(eventPrice.textContent),
       location: eventLocation.textContent,
       totalSpots: parseInt(eventTotalSpots.textContent),
-      category: eventCategory.textContent
+      category: eventCategory.textContent,
+      image: eventImage.textContent
     })
     showMessageBox('Event updated successfully!')
     closeModal();

@@ -356,7 +356,7 @@ h1 {
 
 .modal-box textarea {
   width: 100%;
-  padding: 0.65rem 0.75rem;
+  padding: 0.4rem 0.5rem;
   border-radius: 10px;
   border: 1px solid #d1d5db;
   font-size: 0.9rem;
@@ -381,7 +381,14 @@ h1 {
   display: flex;
   gap: 6px;
   align-items: center;
-  max-width: 300px;
+  max-width: 340px;
+}
+
+.url-field {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 
@@ -410,12 +417,12 @@ h1 {
 }
 
 .read-more-btn {
-  background: #7c3aed;
-  color: white;
-  width: 40%;
+  background: transparent;
+  color: #000000;
+  width: 60%;
   margin: 0.8rem;
-  border-radius: 15px;
-  border: none;
+  border-radius: 8px;
+  border: 1px solid black;
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 600;
@@ -423,7 +430,7 @@ h1 {
 }
 
 .read-more-btn:hover {
-  background: #5b21b6;
+  background-color: rgba(117, 116, 116, 0.2);
 }
 
 .modal-footer {
@@ -723,6 +730,21 @@ h1 {
 
   .admin-right-section, .create-event, .admin-event-list {
     grid-column: 1;
+  }
+
+  .modal-box {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    max-height: 100vh;
+  }
+
+  .modal-content {
+    flex-direction: column;
+  }
+
+  .left-modal, .right-modal {
+    width: 100%
   }
 
   .logout-btn {
