@@ -2,10 +2,10 @@ const API = {
   BASE_URL: "https://webb-projekt-2026-dun.vercel.app/",
 
   async register(name, email, password, role = "user", adminSecret = null) {
-    const body = {name, email, password, role};
+    const body = { name, email, password, role };
     if (adminSecret) body.adminSecret = adminSecret;
 
-     console.log('sending:', body);
+    console.log('sending:', body);
 
     const response = await fetch(`${this.BASE_URL}auth/register`, {
       method: "POST",
@@ -37,29 +37,27 @@ const API = {
   },
 };
 
-
 document.addEventListener("DOMContentLoaded", () => {
-
-  const loginContainer    = document.getElementById("login-container");
+  const loginContainer = document.getElementById("login-container");
   const registerContainer = document.getElementById("register-container");
-  const loginTitle        = document.getElementById("loginTitle");
-  const registerTitle     = document.getElementById("registerTitle");
+  const loginTitle = document.getElementById("loginTitle");
+  const registerTitle = document.getElementById("registerTitle");
 
-  const showRegisterBtn   = document.getElementById("showRegisterBtn");
-  const showLoginBtn      = document.getElementById("showLoginBtn");
+  const showRegisterBtn = document.getElementById("showRegisterBtn");
+  const showLoginBtn = document.getElementById("showLoginBtn");
 
-  const loginForm         = document.getElementById("loginForm");       
-  const registerForm      = document.getElementById("registerForm");   
+  const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
 
-  const forgotBtn         = document.getElementById("forgotPasswordBtn");
-  const forgotForm        = document.getElementById("forgotPasswordForm");
+  const forgotBtn = document.getElementById("forgotPasswordBtn");
+  const forgotForm = document.getElementById("forgotPasswordForm");
 
   // --- Visa registrerings-vy ---
   if (showRegisterBtn) {
     showRegisterBtn.addEventListener("click", () => {
-      loginContainer.style.display    = "none";
+      loginContainer.style.display = "none";
       registerContainer.style.display = "block";
-      if (loginTitle)    loginTitle.style.display    = "none";
+      if (loginTitle) loginTitle.style.display = "none";
       if (registerTitle) registerTitle.style.display = "block";
     });
   }
@@ -68,9 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (showLoginBtn) {
     showLoginBtn.addEventListener("click", () => {
       registerContainer.style.display = "none";
-      loginContainer.style.display    = "block";
+      loginContainer.style.display = "block";
       if (registerTitle) registerTitle.style.display = "none";
-      if (loginTitle)    loginTitle.style.display    = "block";
+      if (loginTitle) loginTitle.style.display = "block";
     });
   }
 
@@ -79,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const email    = document.getElementById("loginEmail").value.trim();
+      const email = document.getElementById("loginEmail").value.trim();
       const password = document.getElementById("loginPassword").value;
 
       try {
@@ -106,9 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         await API.register(name, email, password, role, adminSecret);
         registerContainer.style.display = "none";
-        loginContainer.style.display    = "block";
+        loginContainer.style.display = "block";
         if (registerTitle) registerTitle.style.display = "none";
-        if (loginTitle)    loginTitle.style.display    = "block";
+        if (loginTitle) loginTitle.style.display = "block";
       } catch (err) {
         alert(err.message);
       }
@@ -137,5 +135,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
 });

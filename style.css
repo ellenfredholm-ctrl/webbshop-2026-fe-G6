@@ -299,3 +299,29 @@ body {
 }
 
 
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logout-link {
+  background: transparent;
+  color: white;
+  padding: 0.3rem 0.75rem;
+  border: 2px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  text-decoration: none;
+  line-height: 1.5;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-logout-link:hover {
+  opacity: 0.75;
+  color: rgb(246, 129, 79);
+  border-color: rgb(171, 79, 246);
+  background-color: white;
+}
