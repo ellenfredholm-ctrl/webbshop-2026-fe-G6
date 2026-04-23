@@ -358,7 +358,7 @@ align-items: center;
   margin-bottom: 2rem;
   font-size: 0.9rem;
   background-color: #eff0f0;
-  font-family: "DM Sans", system-ui, sans-serif;
+    font-family: "DM Sans", system-ui, sans-serif;
 }
 
 .event-filters input:focus {

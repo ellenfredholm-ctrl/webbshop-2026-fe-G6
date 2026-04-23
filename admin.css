@@ -133,6 +133,7 @@ h1 {
   width: 100%;
   text-align: center;
   padding: 1.5rem;
+  min-height: 960px;
   max-height: 1000px;
   background: white;
   border-radius: 20px;
