@@ -91,7 +91,6 @@ form.addEventListener("submit", async (e) => {
 
   try {
     await createEvent({ title, description, date, price, location, totalSpots, category, image});
-    // await createEvent({ title, description, date, location, totalSpots, category, image, });
     form.reset();
     loadEvents();
   } catch (err) {
@@ -100,15 +99,8 @@ form.addEventListener("submit", async (e) => {
 });
 
 
-//     -Test for events (placeholder for backend)-
 let events = [];
-// const testEvents = [
-//   {_id: "1", title: "Spökvandring i Gamla Stan", description: "Spökvandring", date: "2026-04-16T00:00:00.000Z", location: "Stockholm", totalSpots: 16, bookedSpots: 8, category: "Guidade turer"},
-//   {_id: "2", title: "Celine Dion Live på Avicii Arena", description: "Konsert wihoo", date: "2026-04-18T00:00:00.000Z", location: "Stockholm", totalSpots: 20000, bookedSpots: 18000, category: "Livemusik"},
-//   {_id: "3", title: "Fiska med oss", description: "Dagsfiske i Göteborgs hamn", date: "2026-04-20T00:00:00.000Z", location: "Göteborg", totalSpots: 24, bookedSpots: 4, category: "Utomhusaktiviteter"},
-//   {_id: "4", title: "Hitta din inre kraft", description: "En wellness-resa med oss i skogen, häng med", date: "2026-04-22T00:00:00.000Z", location: "Skogen", totalSpots: 40, bookedSpots: 2, category: "Hälsa"},
-  
-// ];
+
 
 //     -Loading/rendering events-
 
@@ -148,7 +140,6 @@ async function loadEvents() {
   eventCardsContainer.innerHTML = "<p>Loading...</p>";
   try {
     events = await getEvents();
-    // events = testEvents;
 
     renderEventCards(events);
 
@@ -323,7 +314,7 @@ deleteEventBtn.classList.add('delete-event-btn');
 
 const saveEventEditBtn = document.createElement('button');
 saveEventEditBtn.textContent = "Save";
-saveEventEditBtn.classList.add('modal-save-btn');  //TODO: bara få upp save button om man ändrat nåt?
+saveEventEditBtn.classList.add('modal-save-btn');
 
 eventModalFooter.appendChild(closeEventModalBtn);
 eventModalFooter.appendChild(deleteEventBtn);
@@ -646,15 +637,26 @@ function renderCalendar() {
   dayEventsPanel.classList.remove('open');
 }
 
+// function logOut() {
+//   localStorage.removeItem('token');
+//   window.location.href = 'register.html';
+// }
 
-document.querySelector('.site-header nav').appendChild(logOutBtn);
+// const logOutBtn = document.createElement('button');
+// logOutBtn.classList.add('logout-btn');
+// logOutBtn.textContent = "Log out";
+// logOutBtn.addEventListener('click', () => {
+//   logOut();
+// })
+
+// document.querySelector('.site-header nav').appendChild(logOutBtn);
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // const token = localStorage.getItem('token');
-  // if (!token) {
-  //   window.location.href = 'register.html';
-  //   return;
-  // }
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.href = 'register.html';
+    return;
+  }
   await loadEvents();
   renderCalendar();
   loadRecentEvents();
