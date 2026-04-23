@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About us – EVENTERA</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="about.css">
+  <script type="module" src="./src/scripts/nav.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+      <script type="module" src="./src/scripts/events.js"></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
+</head>
+<body>
+
+ <header class="site-header">
+  <nav>
+
+    <a href="index.html" class="logo">EVENTERA</a>
+
+    <div class="navigation">
+      <!-- checkbox -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-controls="main-menu">
+
+      <!-- burger -->
+      <label for="menu-toggle" class="burger" aria-label="navigation">
+  <span></span>
+  <span></span>
+  <span></span>
+</label>
+
+
+      <!-- meny -->
+         <ul class="nav-links" id="main-menu">
+    <li><a href="events.html">Events</a></li>
+    <li><a href="about.html" class="active">About us</a></li>
+    <li class="nav-login-link"><a href="register.html">Log in</a></li>
+    <li class="nav-myprofile-link"><a href="my-profile.html">My Profile</a></li>
+    <li class="nav-admin-link"><a href="admin.html">Admin</a></li>
+    <li class="nav-logout-link" style="display: none;"><a href="#">Log out</a></li>
+</ul>
+    </div>
+
+  </nav>
+</header>
+
+  <main class="main-content">
+
+    <h2>About <br>EVENTERA</h2>
+    <p class="subtitle">
+      Event booking made simple.
+    </p>
+
+    <section class="about-card">
+      <h3><i data-lucide="users" id="users"></i>Who we are</h3>
+      <p>
+        EVENTERA was created to remove friction from event discovery and booking.
+        Behind this platform are three founders who share a passion for technology, experiences and clean design. We believe great digital products shouldn’t feel complicated — they should just work. Our mission is to reduce the friction between people and experiences, helping more people actually show up to the things they want to do.
+      </p>
+
+      <h3> <i data-lucide="balloon" id="balloon"></i>What we do</h3>
+      <p>
+    We created this platform with a simple idea at its core: to make finding and booking events effortless. Our goal is to make the experience equally simple for both customers and organizers. That’s why we’ve built a system where bookings update in real time and where users can book multiple tickets at once. Making it especially convenient for companies, teams and larger groups.
+      </p>
+
+      <h3><i data-lucide="laugh" id="laugh"></i>Why EVENTERA</h3>
+      <p>
+        Eventera exists to simplify the way people discover and book events by bringing everything into one clear, easy-to-use platform.
+        It's built to make experiences more accessible and to help more people actually get out and do the things they want to do.
+      </p>
+    </section>
+
+<section class="values">
+
+  <div class="value">
+    <h4><i data-lucide="zap" id="zap"></i> Frictionless experience</h4>
+    <p>We remove unnecessary steps so discovering and booking events feels effortless from start to finish.</p>
+  </div>
+
+  <div class="value">
+    <h4><i data-lucide="timer-reset" id="timer"></i> Real-time simplicity</h4>
+    <p>Availability updates instantly so users and organizers always see the same clear, reliable information.</p>
+  </div>
+
+  <div class="value">
+    <h4><i data-lucide="handshake" id="handshake"> </i>Built for real groups</h4>
+    <p>Designed for individuals, teams, and companies — making it easy to book multiple tickets at once.</p>
+  </div>
+
+</section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2026 EVENTERA. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -5,21 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EVENTERA</title>
     <link rel="stylesheet" href="style.css" />
-     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="event.css">
+    <link rel="stylesheet" href="karusell.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="./src/scripts/nav.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
   </head>
   <body>
 
     <!-- HEADER -->
-     <header class="site-header">
-      <nav>
-<a href="index.html" class="logo">EVENTERA</a>
-        <ul class="nav-links">
-          <li><a href="products.html">Events</a></li>
-          <li><a href="register.html">Log in</a></li>
-          <li><a href="admin.html">Admin</a></li>
-        </ul>
-      </nav>
-    </header>
+ <header class="site-header">
+  <nav>
+
+    <a href="index.html" class="logo">EVENTERA</a>
+
+    <div class="navigation">
+      <!-- checkbox -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-controls="main-menu">
+
+      <!-- burger -->
+      <label for="menu-toggle" class="burger" aria-label="navigation">
+  <span></span>
+  <span></span>
+  <span></span>
+</label>
+
+
+      <!-- meny -->
+      <ul class="nav-links" id="main-menu">
+    <li><a href="events.html">Events</a></li>
+    <li><a href="about.html" class="active">About us</a></li>
+    <li class="nav-login-link"><a href="register.html">Log in</a></li>
+    <li class="nav-myprofile-link"><a href="my-profile.html">My Profile</a></li>
+    <li class="nav-admin-link"><a href="admin.html">Admin</a></li>
+    <li class="nav-logout-link" style="display: none;"><a href="#">Log out</a></li>
+</ul>
+    </div>
+
+  </nav>
+</header>
 
 
     <!-- HERO (full width) -->
@@ -29,10 +56,25 @@
     </section>
 
     <!-- MAIN CONTENT -->
-    <main class="main-content">
-      <h1>Featured events</h1>
-      <div id="products"></div>
-    </main>
+<main class="main-content">
+  <h1>Featured events</h1>
+
+  <div class="carousel-3d">
+
+    <!-- Prev / Next buttons -->
+    <div class="carousel-nav">
+      <button id="carousel-prev" class="carousel-btn" aria-label="Previous">&#8592;</button>
+      <button id="carousel-next" class="carousel-btn" aria-label="Next">&#8594;</button>
+    </div>
+
+    <!-- Cards go here -->
+    <div id="featured-events" class="carousel-3d-track"></div>
+
+    <!-- Dot indicators -->
+    <div id="carousel-dots"></div>
+
+  </div>
+</main>
 
     <!-- FOOTER -->
     <footer class="site-footer">

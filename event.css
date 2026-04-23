@@ -30,6 +30,7 @@
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1;
+  margin-bottom: 0.3rem;
 }
 
 
@@ -57,7 +58,7 @@ button {
 }
 
 .book-btn:hover {
-  background: #5b21b6;
+  background: rgb(170, 101, 249);
 }
 
 .sold-out {
@@ -154,16 +155,76 @@ button {
 }
 
 .booking-form button[type="submit"]:hover {
-  background: #c31966;
+  background: #fd4698;
 }
 
 /*CONFIRMATION*/
+.booking-wrapper {
+  position: relative;
+}
+
+/* Göm utan display:none på wrapper — vi håller höjden */
+.booking-form.hidden {
+  display: none;
+}
+
+/* Confirmation centreras i wrappern */
 .confirmation {
+  display: none; /* dolt som standard */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
   font-size: 1.1rem;
   font-weight: 600;
   color: #16a34a;
-  margin-top: 1rem;
 }
+
+.confirmation.visible {
+  display: flex;
+}
+
+/* Animationer körs INTE förrän .animate läggs till */
+.check-animation {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+}
+
+.check-animation svg {
+  width: 100%;
+  height: 100%;
+}
+
+.circle {
+  stroke-dasharray: 157;
+  stroke-dashoffset: 157;
+  /* animation sätts via JS för att garantera omstart */
+}
+
+.check {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  /* animation sätts via JS */
+}
+
+.circle.animate {
+  animation: drawCircle 0.7s ease forwards;
+}
+
+.check.animate {
+  animation: drawCheck 0.4s ease 0.7s forwards;
+}
+
+@keyframes drawCircle {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
 
 /* TEMP NOTICE*/
 .temp-notice {
@@ -252,3 +313,50 @@ button {
 p {
     color: white;
 }
+
+@media (max-width: 768px) {
+    #events {
+grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+align-items: center;
+}
+
+.event-card {
+ max-width: 100%;
+ width: 100%;
+}
+
+.event-card.expanded {
+    grid-column: auto;
+}
+
+.booking-form button[type="submit"] {
+   display: block;
+   margin: 1.5rem auto 0.8rem auto;
+}
+}
+
+.event-filters {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.event-filters label {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #6b7280; 
+    letter-spacing: 0.05em;
+}
+
+.event-filters input {
+     width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 2px solid #d1d5db;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  background-color: #eff0f0;
+}
+

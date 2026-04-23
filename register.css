@@ -1,7 +1,7 @@
-/* Grundinställningar för hela sidan */
+
 body {
     margin: 0;
-    font-family: 'Inter', sans-serif; 
+    font-family: var(--font-body); 
     background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f97316 100%);
     background-attachment: fixed;
     min-height: 100vh;
@@ -18,7 +18,6 @@ body {
     padding: 2rem;
 }
 
-/* "Join the fun" / "Welcome back" badge */
 .badge-top {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(4px);
@@ -32,7 +31,6 @@ body {
     gap: 0.5rem;
 }
 
-/* Rubriker */
 h2 {
     color: white;
     font-size: 2.5rem;
@@ -46,18 +44,17 @@ h2 {
     margin-bottom: 2rem;
 }
 
-/* Det vita kortet */
 .login-wrapper, .register-wrapper {
     background: white;
     width: 100%;
-    min-width: 600px;
+    min-width: 300px;
+    max-width: 600px;
     padding: 2.5rem;
     border-radius: 24px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     margin-top: 5rem;
 }
 
-/* Formulärgrupper */
 .form-group {
     margin-bottom: 1.5rem;
     display: flex;
@@ -69,7 +66,7 @@ h2 {
     text-transform: uppercase;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #6b7280; /* Grå text */
+    color: #6b7280; 
     letter-spacing: 0.05em;
 }
 
@@ -92,6 +89,7 @@ h2 {
     background-color: #f9fafb;
     transition: all 0.2s;
     box-sizing: border-box;
+    font-family: var(--font-body);
 }
 
 .form-group input:focus {
@@ -101,10 +99,9 @@ h2 {
     box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
 }
 
-/* Knappar */
 button[type="submit"] {
     width: 100%;
-    background: #7c3aed; /* Lila */
+    background: #7c3aed; 
     color: white;
     border: none;
     padding: 1rem;
@@ -128,7 +125,6 @@ button[type="submit"]::after {
     content: " →";
 }
 
-/* Växla mellan login/register-länken */
 #showRegisterBtn, #showLoginBtn {
     background: none;
     border: none;
@@ -144,7 +140,6 @@ button[type="submit"]::after {
     color: #7c3aed;
 }
 
-/* Göm rubriker inuti containern eftersom vi har stora vita rubriker utanför */
 .login-wrapper h2, .register-wrapper h2 {
     display: none;
 }
@@ -162,7 +157,7 @@ button[type="submit"]::after {
 .auth-row p {
     margin: 0 !important;
   padding: 0 !important;
-  width: auto !important;             /* Tvingar den att bara ta den plats texten behöver */
+  width: auto !important;           
   color: #6b7280;
   font-size: 1.1rem;
   white-space: nowrap;
@@ -171,7 +166,7 @@ button[type="submit"]::after {
 .auth-row button {
     margin: 0 !important;
   padding: 0 !important;
-  width: auto !important;           /* Tvingar knappen att vara liten */
+  width: auto !important;       
   background: none;
   border: none !important;
   color: #7c3aed;
@@ -221,7 +216,21 @@ button[type="submit"]::after {
   background: #db2777;
 }
 
+#forgotEmail:focus {
+    outline: none;
+    border-color: #a855f7;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
+}
+
 .auth-header {
   text-align: center;
   margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .login-wrapper, .register-wrapper {
+     min-width: auto;
+
+    }
 }
