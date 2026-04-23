@@ -272,6 +272,24 @@ h1 {
   box-shadow: var(--shadow-md);
 }
 
+.admin-event-card.past-event {
+  opacity: 0.5;
+  background: #f9fafb;
+}
+
+.admin-event-card.past-event p {
+  color: #6b7280;
+}
+
+.past-badge {
+  font-size: 0.7rem;
+  background: #e5e7eb;
+  color: #6b7280;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
 .admin-event-card p {
   font-weight: 600;
   font-size: 1.1rem;

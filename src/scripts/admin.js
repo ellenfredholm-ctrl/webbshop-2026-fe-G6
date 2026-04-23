@@ -119,8 +119,10 @@ function renderEventCards(eventsToRender) {
     eventsToShow = eventsToRender;
   }
 
-  eventCardsContainer.innerHTML = eventsToShow.map((p) =>
-    `<div class="admin-event-card" data-event-id="${p._id}"><p>${p.title}</p><button class="event-details-btn">View</button></div>`).join("");
+  eventCardsContainer.innerHTML = eventsToShow.map((p) => {
+    const isPast = new Date(p.date) < new Date();
+    return`<div class="admin-event-card ${isPast ? 'past-event' : ''}" data-event-id="${p._id}"><p>${p.title}  ${isPast ? '<span class="past-badge">Past</span>' : ''}</p>
+    <button class="event-details-btn">View</button></div>`}).join("");
 
   if (isMobile && eventsToRender.length > 6) {
     const showMoreBtn = document.createElement('button');
