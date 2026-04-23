@@ -59,6 +59,8 @@ function textFieldReadMore(fieldElement, text, maxLength = 100) {
     return;
   }
 
+  fieldElement.dataset.fullText = text;
+
   const short = text.substring(0, maxLength) + '...';
   let expanded = false;
 
@@ -111,14 +113,35 @@ let events = [];
 //     -Loading/rendering events-
 
 function renderEventCards(eventsToRender) {
-      if (eventsToRender.length === 0) {
-      eventCardsContainer.innerHTML = "<p>No events found</p>";
-      return;
-    }
-    eventCardsContainer.innerHTML = eventsToRender.map((p) =>
-      `<div class="admin-event-card" data-event-id="${p._id}"><p>${p.title}</p><button class="event-details-btn">View</button></div>`
-      )
-      .join("");
+  console.log('window.innerWidth:', window.innerWidth);
+  console.log('isMobile:', window.innerWidth <= 768);
+  if (eventsToRender.length === 0) {
+    eventCardsContainer.innerHTML = "<p>No events found</p>";
+    return;
+  }
+
+  const isMobile = window.innerWidth <= 768;
+  let eventsToShow;
+
+  if (isMobile) {
+    eventsToShow = eventsToRender.slice(0, 6);
+  } else {
+    eventsToShow = eventsToRender;
+  }
+
+  eventCardsContainer.innerHTML = eventsToShow.map((p) =>
+    `<div class="admin-event-card" data-event-id="${p._id}"><p>${p.title}</p><button class="event-details-btn">View</button></div>`).join("");
+
+  if (isMobile && eventsToRender.length > 6) {
+    const showMoreBtn = document.createElement('button');
+    showMoreBtn.textContent = 'Show more';
+    showMoreBtn.classList.add('show-more-btn');
+    showMoreBtn.addEventListener('click', () => {
+      eventCardsContainer.innerHTML = eventsToRender.map((p) => 
+      `<div class="admin-event-card" data-event-id="${p._id}"><p>${p.title}</p><button class="event-details-btn">View</button></div>`).join("");
+    })
+    eventCardsContainer.appendChild(showMoreBtn);
+  }
 }
 
 async function loadEvents() {
@@ -174,12 +197,9 @@ function createModalField(label, value, onEdit, type = 'text', readMore = false)
   editBtn.classList.add('edit-field-btn');
 
   editBtn.addEventListener('click', () => {
-    //For bookedspots
     if(onEdit) {
       onEdit();
-    
     } else {
-      //Date field
       if(type === 'date') {
         const input = document.createElement('input');
         input.type = 'date';
@@ -193,11 +213,29 @@ function createModalField(label, value, onEdit, type = 'text', readMore = false)
           input.replaceWith(fieldValue);
         })
       } else {
-        //Everything else
         const input = document.createElement('textarea');
-        input.value = fieldValue.textContent;
-        input.rows = 1; 
+        const fieldText = fieldValue.querySelector('.field-text');
+        let inputValue;
+        if (fieldValue.dataset.fullText) {
+          inputValue = fieldValue.dataset.fullText;
+        } else if (fieldText) {
+          inputValue = fieldText.textContent;
+        } else {
+          inputValue = fieldValue.textContent;
+        }
+        input.value = inputValue;
 
+        if (readMore) {
+          input.rows = 4;
+        } else {
+          input.rows = 1; 
+        }
+
+        input.addEventListener('focus', () => {
+          input.style.height = 'auto';
+          input.style.height = `${input.scrollHeight}px`;
+        })
+        
         input.addEventListener('input', () => {
           input.style.height = 'auto';
           input.style.height = `${input.scrollHeight}px`;
@@ -214,6 +252,7 @@ function createModalField(label, value, onEdit, type = 'text', readMore = false)
           } else {
             fieldValue.textContent = newText;
           }
+
 
         })
       }
@@ -399,7 +438,7 @@ saveEventEditBtn.addEventListener('click', async () => {
   try {
     await updateEvent(currentEventId, {
       title: eventTitle.textContent,
-      description: eventDescription.textContent,
+      description: eventDescription.dataset.fullText || eventDescription.querySelector('.field-text')?.textContent || eventDescription.textContent,
       date: currentEventDate,
       price: parseFloat(eventPrice.textContent),
       location: eventLocation.textContent,
