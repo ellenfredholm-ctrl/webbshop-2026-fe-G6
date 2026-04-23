@@ -33,6 +33,9 @@ async function loadFeaturedEvents() {
     const res = await fetch(API_EVENTS);
     if (!res.ok) throw new Error();
     events = await res.json();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    events = events.filter(event => new Date(event.date) >= today);
   } catch {
     events = TEMP_EVENTS;
   }
