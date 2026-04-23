@@ -294,6 +294,11 @@ function setupBooking(card, event) {
       circle.classList.add("animate");
       check.classList.add("animate");
 
+      setTimeout(() => {
+        card.classList.remove("expanded");
+        renderCollapsed(card, event);
+      }, 2000)
+
     } catch {
       alert("Booking failed. Please try again.");
     }
@@ -337,9 +342,9 @@ function icon(type) {
   return `<span class="icon ${type}">${icons[type]}</span>`; 
 } 
 
-document.addEventListener("DOMContentLoaded", () => {
-  lucide.createIcons();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   lucide.createIcons();
+// });
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchForm = document.getElementById("search-form");

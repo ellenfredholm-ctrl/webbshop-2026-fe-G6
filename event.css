@@ -351,12 +351,17 @@ align-items: center;
 }
 
 .event-filters input {
-     width: 100%;
+  width: 100%;
   padding: 0.65rem 0.75rem;
   border-radius: 10px;
   border: 2px solid #d1d5db;
   margin-bottom: 2rem;
   font-size: 0.9rem;
   background-color: #eff0f0;
+}
+
+.event-filters input:focus {
+  outline: none;
+  border-color: #6b7280;
 }
 
