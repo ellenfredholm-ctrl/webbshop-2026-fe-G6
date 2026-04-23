@@ -105,8 +105,6 @@ let events = [];
 //     -Loading/rendering events-
 
 function renderEventCards(eventsToRender) {
-  console.log('window.innerWidth:', window.innerWidth);
-  console.log('isMobile:', window.innerWidth <= 768);
   if (eventsToRender.length === 0) {
     eventCardsContainer.innerHTML = "<p>No events found</p>";
     return;
@@ -148,6 +146,14 @@ async function loadEvents() {
     eventCardsContainer.innerHTML = "<p>Failed to load events.</p>";
   }
 }
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    renderEventCards(events);
+  }, 250);
+});
 
 //     -Modal pop-up for event-details & edit-
 const eventModal = document.createElement('div');
@@ -239,6 +245,7 @@ function createModalField(label, value, onEdit, type = 'text', readMore = false)
           const newText = input.value;
           input.replaceWith(fieldValue);
           if (readMore) {
+            delete fieldValue.dataset.fullText;
             textFieldReadMore(fieldValue, newText);
           } else {
             fieldValue.textContent = newText;
@@ -406,6 +413,7 @@ eventCardsContainer.addEventListener('click', (e) => {
     const event = events.find(e => e._id === eventId);
     currentEventId = event._id;
     currentEventDate = event.date;
+    delete eventDescription.dataset.fullText;
     eventTitle.textContent = event.title;
     textFieldReadMore(eventDescription, event.description);
     eventDate.textContent = new Date(event.date).toLocaleDateString();
@@ -426,10 +434,13 @@ closeEventModalBtn.addEventListener('click', (e) => {
 
 //     -Save event edits-
 saveEventEditBtn.addEventListener('click', async () => {
+  const descToSave = (eventDescription.dataset.fullText && eventDescription.dataset.fullText.length > 0)
+  ? eventDescription.dataset.fullText 
+  : (eventDescription.querySelector('.field-text')?.textContent || eventDescription.textContent);
   try {
     await updateEvent(currentEventId, {
       title: eventTitle.textContent,
-      description: eventDescription.dataset.fullText || eventDescription.querySelector('.field-text')?.textContent || eventDescription.textContent,
+      description: descToSave,
       date: currentEventDate,
       price: parseFloat(eventPrice.textContent),
       location: eventLocation.textContent,
@@ -625,8 +636,8 @@ function loadRecentEvents() {
   }
     recentEventsContainer.innerHTML = pastEvents.map(event => 
     `<div class="recent-event-item">
-      <p>Event: ${event.title}</p>
-      <p>Happened: ${new Date(event.date).toDateString()} in ${event.location}</p>
+      <p><strong>Event:</strong> ${event.title}</p>
+      <p><strong>Happened on:</strong> ${new Date(event.date).toDateString()} in ${event.location}</p>
     </div>`).join("");
 }
 
@@ -637,19 +648,6 @@ function renderCalendar() {
   dayEventsPanel.classList.remove('open');
 }
 
-// function logOut() {
-//   localStorage.removeItem('token');
-//   window.location.href = 'register.html';
-// }
-
-// const logOutBtn = document.createElement('button');
-// logOutBtn.classList.add('logout-btn');
-// logOutBtn.textContent = "Log out";
-// logOutBtn.addEventListener('click', () => {
-//   logOut();
-// })
-
-// document.querySelector('.site-header nav').appendChild(logOutBtn);
 
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem('token');

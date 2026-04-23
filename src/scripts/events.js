@@ -43,6 +43,11 @@ async function loadEvents() {
     if (!res.ok) throw new Error();
 
     allEvents = await res.json();
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    allEvents = allEvents.filter(event => new Date(event.date) >= today);
+
   } catch {
     allEvents = TEMP_EVENTS;
     isTemp = true;
@@ -314,7 +319,6 @@ function stopClickPropagation(card) {
 function formatDate(dateString) {
   return new Date(dateString).toLocaleString("en-GB", {
     dateStyle: "medium",
-    timeStyle: "short"
   });
 }
 
